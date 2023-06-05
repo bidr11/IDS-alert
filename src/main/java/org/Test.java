@@ -1,11 +1,6 @@
 package org;
 
-import org.web3j.abi.datatypes.generated.Bytes32;
-
 import java.math.BigInteger;
-import java.nio.charset.Charset;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Test {
     public static byte[] stringToBytes32(String string) {

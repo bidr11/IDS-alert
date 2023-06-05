@@ -28,32 +28,32 @@ public class Signature {
 
     public List<BigInteger> getSuspectsParameterIndexes() {
         List<BigInteger> output = new ArrayList<>() ;
-        for (int i = 0; i < suspects.length; i++) {
-            output.add(this.suspects[i].getParameterIndex());
+        for (Suspect suspect : suspects) {
+            output.add(suspect.getParameterIndex());
         }
         return output;
     }
 
     public List<BigInteger> getSuspectsFeatures() {
         List<BigInteger> output = new ArrayList<>() ;
-        for (int i = 0; i < suspects.length; i++) {
-            output.add(this.suspects[i].getFeature());
+        for (Suspect suspect : suspects) {
+            output.add(suspect.getFeature());
         }
         return output;
     }
 
     public List<String> getSuspectsPaths() {
         List<String> output = new ArrayList<>();
-        for (int i = 0; i < suspects.length; i++) {
-            output.add(this.suspects[i].getPath());
+        for (Suspect suspect : suspects) {
+            output.add(suspect.getPath());
         }
         return output;
     }
 
     public List<String> getSuspectsChars() {
         List<String> output = new ArrayList<>();
-        for (int i = 0; i < suspects.length; i++) {
-            output.add(this.suspects[i].getChars());
+        for (Suspect suspect : suspects) {
+            output.add(suspect.getChars());
         }
         return output;
     }
