@@ -24,6 +24,7 @@ public class AlertSubscriber {
         web3j.ethLogFlowable(filter).subscribe(event -> {
             System.out.println("Event received");
 
+            // this entire part needs refactoring, could use its own function
             List<Type> args = FunctionReturnDecoder.decode(
                     event.getData(), AlertProcessor.NEWALERT_EVENT.getParameters());
 
@@ -47,9 +48,9 @@ public class AlertSubscriber {
     }
 
     public static void main(String[] args) {
-        AlertSubscriber wow = new AlertSubscriber();
+        AlertSubscriber subscriber = new AlertSubscriber();
         try {
-            wow.subscribeToEvents();
+            subscriber.subscribeToEvents();
         } catch (Exception e) {
             e.printStackTrace();
         }

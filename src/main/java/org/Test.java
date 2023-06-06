@@ -12,14 +12,14 @@ public class Test {
     }
     public static void main(String[] args) {
         AlertSender sender = new AlertSender();
-        String fqmn = "test";
-        byte[] callstack = stringToBytes32("test");
+        String fqmn = "Nouveau";
+        byte[] callstack = stringToBytes32("oieriwueoirwer");
         BigInteger[] parameterIndexes = {BigInteger.valueOf(1231231), BigInteger.valueOf(9934)};
         BigInteger[] features = {BigInteger.valueOf(1234), BigInteger.valueOf(222)};
         String[] paths = {"asdasdasdasdasd", "ehtlsiejrse"};
         String[] chars = {"sdsdsdsdsds", "akuwhdkahsd"};
         BigInteger timestamp = BigInteger.valueOf(1234);
-        String description = "test";
+        String description = "This is a test done to test";
         sender.createAlert(fqmn, callstack, parameterIndexes, features, paths, chars, timestamp, description);
     }
 }

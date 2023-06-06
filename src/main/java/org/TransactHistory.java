@@ -39,6 +39,7 @@ public class TransactHistory {
         BigInteger latestBlockNumber = block.getNumber();
         List<EthBlock.TransactionResult> allTransactions = new ArrayList<>();
 
+        // this entire part could use refactoring
         int totalTransactions = 0;
         for (BigInteger i = BigInteger.ZERO; i.compareTo(latestBlockNumber) <= 0; i = i.add(BigInteger.ONE)) {
             EthBlock etherBlock = web3.ethGetBlockByNumber(DefaultBlockParameter.valueOf(i), true).send();
@@ -56,40 +57,38 @@ public class TransactHistory {
             if (contractAddress != null && contractAddress.toLowerCase().equals(CONTRACT_ADDRESS)) {
                 String data = transactionObject.getInput();
                 System.out.println("De: " + transactionObject.getFrom());
-                System.out.println("Données: " + data);
+
+                List<Type> result = decodeInputData(data, "processAlert",
+                        Arrays.asList(new TypeReference<Utf8String>() {},
+                                new TypeReference<Bytes32>() {},
+                                new TypeReference<DynamicArray<Uint256>>() {},
+                                new TypeReference<DynamicArray<Uint256>>() {},
+                                new TypeReference<DynamicArray<Utf8String>>() {},
+                                new TypeReference<DynamicArray<Utf8String>>() {},
+                                new TypeReference<Uint256>() {},
+                                new TypeReference<Utf8String>() {}
+                        )
+                );
+
+                for (Type thing: result) {
+                    if (thing.getClass().equals(Uint256.class))
+                        System.out.println(((Uint256)thing).getValue());
+                    if (thing.getClass().equals(Utf8String.class))
+                        System.out.println(thing);
+                }
                 System.out.println();
 
-//                List<Type> result = decodeInputData(data, "processAlert",
-//                        Arrays.asList(new TypeReference<Utf8String>() {},
-//                                new TypeReference<Bytes32>() {},
-//                                new TypeReference<DynamicArray<Uint256>>() {},
-//                                new TypeReference<DynamicArray<Uint256>>() {},
-//                                new TypeReference<DynamicArray<Utf8String>>() {},
-//                                new TypeReference<DynamicArray<Utf8String>>() {},
-//                                new TypeReference<Uint256>() {},
-//                                new TypeReference<Utf8String>() {}
-//                        )
-//                );
-//
-//                for (Type thing: result) {
-//                    if (thing.getClass().equals(new Uint256(1).getClass()))
-//                        System.out.println((BigInteger) thing);
-//                    if (thing.getClass().equals(new Utf8String("test").getClass()))
-//                        System.out.println(thing);
-//
-//
-//                }
         }
 
-        List<EthBlock.TransactionResult> txs = web3.ethGetBlockByNumber(DefaultBlockParameterName.LATEST, true).send().getBlock().getTransactions();
-        if (txs.size() > 0) {
-            EthBlock.TransactionObject lastTransaction = (EthBlock.TransactionObject) txs.get(txs.size() - 1).get();
-            System.out.println("Dernière transaction: ");
-            System.out.println("De:" + lastTransaction.getFrom());
-            System.out.println("A:" + lastTransaction.getTo());
-            System.out.println("Nonce:" + lastTransaction.getNonce());
-            System.out.println(lastTransaction.get());
-            System.out.println("Données:" + lastTransaction.getInput());
-        }
+//        List<EthBlock.TransactionResult> txs = web3.ethGetBlockByNumber(DefaultBlockParameterName.LATEST, true).send().getBlock().getTransactions();
+//        if (txs.size() > 0) {
+//            EthBlock.TransactionObject lastTransaction = (EthBlock.TransactionObject) txs.get(txs.size() - 1).get();
+//            System.out.println("Dernière transaction: ");
+//            System.out.println("De:" + lastTransaction.getFrom());
+//            System.out.println("A:" + lastTransaction.getTo());
+//            System.out.println("Nonce:" + lastTransaction.getNonce());
+//            System.out.println(lastTransaction.get());
+//            System.out.println("Données:" + lastTransaction.getInput());
+//        }
     }
 }}

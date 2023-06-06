@@ -16,6 +16,7 @@ public class AlertSender {
     private final Credentials creds;
 
     public AlertSender() {
+
         String networkLink = "http://192.168.109.131:8545";
         Web3j web3 = Web3j.build(new HttpService(networkLink));
 
@@ -57,7 +58,6 @@ public class AlertSender {
         try {
             AlertProcessor contract = AlertProcessor.load(CONTRACT_ADDRESS, web3j, creds, new StaticGasProvider(GAS_PRICE, GAS_LIMIT));
             Signature signature = alert.getSignature();
-//            Suspect[] suspects = signature.getSuspects();
 
             TransactionReceipt transactionReceipt = contract.processAlert(
                     signature.getFqmn(),
