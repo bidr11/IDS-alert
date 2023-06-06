@@ -10,10 +10,8 @@ import java.math.BigInteger;
 
 public class AlertSender {
     private static final String CONTRACT_ADDRESS = "0x66752e648a8E96eD9cFE5CFB8BF4646Bb4E8317C";
-
     private static final BigInteger GAS_LIMIT = BigInteger.valueOf(500000);
     private static final BigInteger GAS_PRICE = BigInteger.valueOf(20000000000L); // 20 Gwei
-
     private final Web3j web3j;
     private final Credentials creds;
 
