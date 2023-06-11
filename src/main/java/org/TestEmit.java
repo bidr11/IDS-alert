@@ -2,7 +2,7 @@ package org;
 
 import java.math.BigInteger;
 
-public class Test {
+public class TestEmit {
     public static byte[] stringToBytes32(String string) {
         byte[] byteValue = string.getBytes();
         byte[] byteValueLen32 = new byte[32];

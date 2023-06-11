@@ -47,38 +47,38 @@ public class AlertProcessor extends Contract {
     public static final Event NEWALERT_EVENT = new Event("NewAlert",
             Arrays.asList(new TypeReference<Utf8String>() {}, new TypeReference<Uint256>() {}, new TypeReference<DynamicArray<Suspect>>() {}, new TypeReference<Utf8String>() {}));
 
-    @Deprecated
-    protected AlertProcessor(String contractAddress, Web3j web3j, Credentials credentials, BigInteger gasPrice, BigInteger gasLimit) {
-        super(BINARY, contractAddress, web3j, credentials, gasPrice, gasLimit);
-    }
+//    @Deprecated
+//    protected AlertProcessor(String contractAddress, Web3j web3j, Credentials credentials, BigInteger gasPrice, BigInteger gasLimit) {
+//        super(BINARY, contractAddress, web3j, credentials, gasPrice, gasLimit);
+//    }
 
     protected AlertProcessor(String contractAddress, Web3j web3j, Credentials credentials, ContractGasProvider contractGasProvider) {
         super(BINARY, contractAddress, web3j, credentials, contractGasProvider);
     }
 
-    @Deprecated
-    protected AlertProcessor(String contractAddress, Web3j web3j, TransactionManager transactionManager, BigInteger gasPrice, BigInteger gasLimit) {
-        super(BINARY, contractAddress, web3j, transactionManager, gasPrice, gasLimit);
-    }
+//    @Deprecated
+//    protected AlertProcessor(String contractAddress, Web3j web3j, TransactionManager transactionManager, BigInteger gasPrice, BigInteger gasLimit) {
+//        super(BINARY, contractAddress, web3j, transactionManager, gasPrice, gasLimit);
+//    }
 
     protected AlertProcessor(String contractAddress, Web3j web3j, TransactionManager transactionManager, ContractGasProvider contractGasProvider) {
         super(BINARY, contractAddress, web3j, transactionManager, contractGasProvider);
     }
 
-    public static List<NewAlertEventResponse> getNewAlertEvents(TransactionReceipt transactionReceipt) {
-        List<Contract.EventValuesWithLog> valueList = staticExtractEventParametersWithLog(NEWALERT_EVENT, transactionReceipt);
-        ArrayList<NewAlertEventResponse> responses = new ArrayList<NewAlertEventResponse>(valueList.size());
-        for (Contract.EventValuesWithLog eventValues : valueList) {
-            NewAlertEventResponse typedResponse = new NewAlertEventResponse();
-            typedResponse.log = eventValues.getLog();
-            typedResponse.fqmn = (String) eventValues.getNonIndexedValues().get(0).getValue();
-            typedResponse.timestamp = (BigInteger) eventValues.getNonIndexedValues().get(1).getValue();
-            typedResponse.suspect = (List<Suspect>) ((Array) eventValues.getNonIndexedValues().get(2)).getNativeValueCopy();
-            typedResponse.description = (String) eventValues.getNonIndexedValues().get(3).getValue();
-            responses.add(typedResponse);
-        }
-        return responses;
-    }
+//    public static List<NewAlertEventResponse> getNewAlertEvents(TransactionReceipt transactionReceipt) {
+//        List<Contract.EventValuesWithLog> valueList = staticExtractEventParametersWithLog(NEWALERT_EVENT, transactionReceipt);
+//        ArrayList<NewAlertEventResponse> responses = new ArrayList<NewAlertEventResponse>(valueList.size());
+//        for (Contract.EventValuesWithLog eventValues : valueList) {
+//            NewAlertEventResponse typedResponse = new NewAlertEventResponse();
+//            typedResponse.log = eventValues.getLog();
+//            typedResponse.fqmn = (String) eventValues.getNonIndexedValues().get(0).getValue();
+//            typedResponse.timestamp = (BigInteger) eventValues.getNonIndexedValues().get(1).getValue();
+//            typedResponse.suspect = (List<Suspect>) ((Array) eventValues.getNonIndexedValues().get(2)).getNativeValueCopy();
+//            typedResponse.description = (String) eventValues.getNonIndexedValues().get(3).getValue();
+//            responses.add(typedResponse);
+//        }
+//        return responses;
+//    }
 
     public Flowable<NewAlertEventResponse> newAlertEventFlowable(EthFilter filter) {
         return web3j.ethLogFlowable(filter).map(new Function<Log, NewAlertEventResponse>() {
@@ -125,41 +125,41 @@ public class AlertProcessor extends Contract {
         return executeRemoteCallTransaction(function);
     }
 
-    @Deprecated
-    public static AlertProcessor load(String contractAddress, Web3j web3j, Credentials credentials, BigInteger gasPrice, BigInteger gasLimit) {
-        return new AlertProcessor(contractAddress, web3j, credentials, gasPrice, gasLimit);
-    }
-
-    @Deprecated
-    public static AlertProcessor load(String contractAddress, Web3j web3j, TransactionManager transactionManager, BigInteger gasPrice, BigInteger gasLimit) {
-        return new AlertProcessor(contractAddress, web3j, transactionManager, gasPrice, gasLimit);
-    }
+//    @Deprecated
+//    public static AlertProcessor load(String contractAddress, Web3j web3j, Credentials credentials, BigInteger gasPrice, BigInteger gasLimit) {
+//        return new AlertProcessor(contractAddress, web3j, credentials, gasPrice, gasLimit);
+//    }
+//
+//    @Deprecated
+//    public static AlertProcessor load(String contractAddress, Web3j web3j, TransactionManager transactionManager, BigInteger gasPrice, BigInteger gasLimit) {
+//        return new AlertProcessor(contractAddress, web3j, transactionManager, gasPrice, gasLimit);
+//    }
 
     public static AlertProcessor load(String contractAddress, Web3j web3j, Credentials credentials, ContractGasProvider contractGasProvider) {
         return new AlertProcessor(contractAddress, web3j, credentials, contractGasProvider);
     }
 
-    public static AlertProcessor load(String contractAddress, Web3j web3j, TransactionManager transactionManager, ContractGasProvider contractGasProvider) {
-        return new AlertProcessor(contractAddress, web3j, transactionManager, contractGasProvider);
-    }
+//    public static AlertProcessor load(String contractAddress, Web3j web3j, TransactionManager transactionManager, ContractGasProvider contractGasProvider) {
+//        return new AlertProcessor(contractAddress, web3j, transactionManager, contractGasProvider);
+//    }
 
-    public static RemoteCall<AlertProcessor> deploy(Web3j web3j, Credentials credentials, ContractGasProvider contractGasProvider) {
-        return deployRemoteCall(AlertProcessor.class, web3j, credentials, contractGasProvider, BINARY, "");
-    }
+//    public static RemoteCall<AlertProcessor> deploy(Web3j web3j, Credentials credentials, ContractGasProvider contractGasProvider) {
+//        return deployRemoteCall(AlertProcessor.class, web3j, credentials, contractGasProvider, BINARY, "");
+//    }
 
-    @Deprecated
-    public static RemoteCall<AlertProcessor> deploy(Web3j web3j, Credentials credentials, BigInteger gasPrice, BigInteger gasLimit) {
-        return deployRemoteCall(AlertProcessor.class, web3j, credentials, gasPrice, gasLimit, BINARY, "");
-    }
+//    @Deprecated
+//    public static RemoteCall<AlertProcessor> deploy(Web3j web3j, Credentials credentials, BigInteger gasPrice, BigInteger gasLimit) {
+//        return deployRemoteCall(AlertProcessor.class, web3j, credentials, gasPrice, gasLimit, BINARY, "");
+//    }
 
-    public static RemoteCall<AlertProcessor> deploy(Web3j web3j, TransactionManager transactionManager, ContractGasProvider contractGasProvider) {
-        return deployRemoteCall(AlertProcessor.class, web3j, transactionManager, contractGasProvider, BINARY, "");
-    }
+//    public static RemoteCall<AlertProcessor> deploy(Web3j web3j, TransactionManager transactionManager, ContractGasProvider contractGasProvider) {
+//        return deployRemoteCall(AlertProcessor.class, web3j, transactionManager, contractGasProvider, BINARY, "");
+//    }
 
-    @Deprecated
-    public static RemoteCall<AlertProcessor> deploy(Web3j web3j, TransactionManager transactionManager, BigInteger gasPrice, BigInteger gasLimit) {
-        return deployRemoteCall(AlertProcessor.class, web3j, transactionManager, gasPrice, gasLimit, BINARY, "");
-    }
+//    @Deprecated
+//    public static RemoteCall<AlertProcessor> deploy(Web3j web3j, TransactionManager transactionManager, BigInteger gasPrice, BigInteger gasLimit) {
+//        return deployRemoteCall(AlertProcessor.class, web3j, transactionManager, gasPrice, gasLimit, BINARY, "");
+//    }
 
 
     public static class NewAlertEventResponse extends BaseEventResponse {

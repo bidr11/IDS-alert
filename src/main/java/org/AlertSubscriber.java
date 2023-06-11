@@ -5,6 +5,7 @@ import org.web3j.abi.datatypes.Type;
 import org.web3j.protocol.Web3j;
 import org.web3j.protocol.core.DefaultBlockParameterName;
 import org.web3j.protocol.core.methods.request.EthFilter;
+import org.web3j.protocol.core.methods.response.TransactionReceipt;
 import org.web3j.protocol.http.HttpService;
 
 import java.math.BigInteger;
@@ -45,14 +46,5 @@ public class AlertSubscriber {
                 System.out.println("\tchars: " + suspect.getChars() + "\n");
             }
         }, error -> System.out.println("Error: " + error));
-    }
-
-    public static void main(String[] args) {
-        AlertSubscriber subscriber = new AlertSubscriber();
-        try {
-            subscriber.subscribeToEvents();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 }
